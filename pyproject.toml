@@ -42,8 +42,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.7"
 SQLAlchemy = "^2.0.0"
-# TODO: release with dbapi2, then: libsql-client = "^0.2.3-pre"
-libsql-client = {path = "../libsql-client-py", develop = true}
+libsql-client = "^0.3.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3"
