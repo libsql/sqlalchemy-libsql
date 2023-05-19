@@ -32,6 +32,29 @@ Then, in your Python app, you can connect to the database via::
 Note that ``secure=true`` query/search parameter will force the usage of
 secure WebSockets (``wss://``) to connect to the remote server.
 
+Development
+-----------
+
+This project uses `poetry<https://python-poetry.org/>`_, can be tested with
+`pytest<https://pytest.org/>`_ and should be checked with
+`pre-commit<https://pre-commit.com/>`_. A
+`pure-python<https://github.com/libsql/hrana-test-server>`_ test server is used
+as a submodule::
+
+    git clone https://github.com/libsql/sqlalchemy-libsql.git
+    cd sqlalchemy-libsql
+    git submodule init && git submodule update  # hrana-test-server
+
+    pre-commit install         # install git-hooks
+    poetry install --with dev  # pytest
+
+    pre-commit run -a          # check all files in the project, runs pytest
+
+    poetry run pytest
+    poetry run pytest --log-debug=libsql_client  # debug libsql_client usage
+    # run against WSS server:
+    poetry run pytest --dburi "sqlite+libsql://server.com?secure=true&authToken=JWT_HERE"
+
 
 The SQLAlchemy Project
 ======================

@@ -32,7 +32,8 @@ repos:
     hooks:
     -   id: pytest-check
         name: pytest-check
-        entry: pytest
+        entry: poetry run python hrana-test-server/server_v2.py pytest --verbose
         language: system
         pass_filenames: false
         always_run: true
+        types: [python]

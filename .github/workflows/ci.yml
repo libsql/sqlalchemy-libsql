@@ -4,7 +4,15 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ '*' ]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+concurrency:
+  group: ci-check-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check:
@@ -15,6 +23,8 @@ jobs:
         "python-version": ["3.7", "3.11"]
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: true
     - name: "Install Poetry"
       run: "pip install poetry"
     - name: "Setup Python"
@@ -25,10 +35,3 @@ jobs:
     - name: "Install poetry dependencies"
       run: "poetry install --no-interaction"
     - uses: pre-commit/action@v3.0.0
-    - name: "Checkout hrana-test-server"
-      uses: actions/checkout@v3
-      with:
-        repository: "libsql/hrana-test-server"
-        path: "hrana-test-server"
-    - name: "Test with server v2"
-      run: "poetry run python hrana-test-server/server_v2.py pytest --verbose"

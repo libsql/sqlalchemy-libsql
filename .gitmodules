@@ -1,0 +1,4 @@
+[submodule "hrana-test-server"]
+	path = hrana-test-server
+	url = https://github.com/libsql/hrana-test-server
+	branch =  main
