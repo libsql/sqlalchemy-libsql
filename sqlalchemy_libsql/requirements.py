@@ -53,6 +53,7 @@ class Requirements(SuiteRequirements):
             cursor = connection.cursor()
             try:
                 cursor.execute("ATTACH ':memory:' AS test_schema")
+                cursor.execute("DETACH test_schema")
                 return True
             except:
                 return False

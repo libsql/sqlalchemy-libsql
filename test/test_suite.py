@@ -1743,6 +1743,7 @@ class ReflectHeadlessFKsTest(fixtures.TestBase):
 
 
 class KeywordInDatabaseNameTest(fixtures.TestBase):
+    __requires__ = ("sqlite_attach",)
     __only_on__ = "sqlite"
     __backend__ = True
 
