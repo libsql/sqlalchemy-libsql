@@ -1,0 +1,53 @@
+[tool.black]
+line-length = 79
+target-version = ['py37']
+
+[tool.pytest.ini_options]
+addopts = "--tb native -v -r sfxX --maxfail=25 -p no:warnings"
+
+[tool.poetry]
+name = "sqlalchemy-libsql"
+version = "0.1.0-pre"
+authors = [
+    "Douglas Montes <dmontes@chiselstrike.com>",
+    "Gustavo Sverzut Barbieri <barbieri@profusion.mobi>",
+    "ChiselStrike",
+]
+description = "LibSQL.org for SQLAlchemy"
+keywords = [
+    "SQLAlchemy",
+    "LibSQL",
+    "SQLite",
+    "Database",
+]
+homepage = "https://github.com/libsql/sqlalchemy-libsql"
+repository = "https://github.com/libsql/sqlalchemy-libsql"
+documentation = "https://libsql.org/sqlalchemy-libsql/"
+readme = "README.rst"
+license = "MIT"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Database :: Front-Ends",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry.plugins."sqlalchemy.dialects"]
+"sqlite.libsql" = "sqlalchemy_libsql:SQLiteDialect_libsql"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+SQLAlchemy = "^2.0.0"
+# TODO: release with dbapi2, then: libsql-client = "^0.2.3-pre"
+libsql-client = {path = "../libsql-client-py", develop = true}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,34 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft != true
+    strategy:
+      matrix:
+        "python-version": ["3.7", "3.11"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: "Install Poetry"
+      run: "pip install poetry"
+    - name: "Setup Python"
+      uses: actions/setup-python@v4
+      with:
+        python-version: "${{ matrix.python-version }}"
+        cache: "poetry"
+    - name: "Install poetry dependencies"
+      run: "poetry install --no-interaction"
+    - uses: pre-commit/action@v3.0.0
+    - name: "Checkout hrana-test-server"
+      uses: actions/checkout@v3
+      with:
+        repository: "libsql/hrana-test-server"
+        path: "hrana-test-server"
+    - name: "Test with server v2"
+      run: "poetry run python hrana-test-server/server_v2.py pytest --verbose"

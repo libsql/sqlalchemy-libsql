@@ -1,0 +1,8 @@
+/.eggs/
+/.idea/
+/.venv/
+/build/
+/dist/
+/test/__pycache__/
+/sqlalchemy_libsql/__pycache__/
+/sqlalchemy_libsql.egg-info/
