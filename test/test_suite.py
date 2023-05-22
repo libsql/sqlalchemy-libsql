@@ -128,7 +128,6 @@ class TestTypes(fixtures.TestBase, AssertsExecutionResults):
                 ).scalar(),
             )
 
-    @testing.skip_if("+libsql")  # not implemented yet
     @testing.provide_metadata
     def test_native_datetime(self):
         dbapi = testing.db.dialect.dbapi
