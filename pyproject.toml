@@ -7,7 +7,7 @@ addopts = "--tb native -v -r sfxX --maxfail=25 -p no:warnings"
 
 [tool.poetry]
 name = "sqlalchemy-libsql"
-version = "0.1.0-pre"
+version = "0.1.0"
 authors = [
     "Douglas Montes <dmontes@chiselstrike.com>",
     "Gustavo Sverzut Barbieri <barbieri@profusion.mobi>",

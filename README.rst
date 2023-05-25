@@ -1,7 +1,7 @@
 sqlalchemy-libsql
 =================
 
-A `LibSQL<https://libsql.org/>`_ dialect for SQLAlchemy.
+A `LibSQL <https://libsql.org/>`_ dialect for SQLAlchemy.
 
 This dialect requires SQLAlchemy 2.0 or later.
 
@@ -35,10 +35,10 @@ secure WebSockets (``wss://``) to connect to the remote server.
 Development
 -----------
 
-This project uses `poetry<https://python-poetry.org/>`_, can be tested with
-`pytest<https://pytest.org/>`_ and should be checked with
-`pre-commit<https://pre-commit.com/>`_. A
-`pure-python<https://github.com/libsql/hrana-test-server>`_ test server is used
+This project uses `poetry <https://python-poetry.org/>`_, can be tested with
+`pytest <https://pytest.org/>`_ and should be checked with
+`pre-commit <https://pre-commit.com/>`_. A
+`pure-python <https://github.com/libsql/hrana-test-server>`_ test server is used
 as a submodule::
 
     git clone https://github.com/libsql/sqlalchemy-libsql.git
