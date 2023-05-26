@@ -1,36 +1,58 @@
 sqlalchemy-libsql
 =================
 
-A `LibSQL <https://libsql.org/>`_ dialect for SQLAlchemy.
-
-This dialect requires SQLAlchemy 2.0 or later.
+A `libSQL <https://libsql.org/>`_ dialect for `SQLAlchemy <https://www.sqlalchemy.org/>`_.
 
 
 Pre-requisites
 --------------
 
-- Running instance of https://github.com/libsql/sqld. You can easily get one at https://turso.tech/
-- Alternatively a https://github.com/libsql/hrana-test-server, a pure-python implementation
+You must have a running instance of `sqld <https://github.com/libsql/sqld>`_,
+which is the libSQL server mode. There are several supported options:
+
+- `Build and run an instance
+  <https://github.com/libsql/sqld/blob/main/docs/BUILD-RUN.md>`_ on your local
+  machine.
+- Use an instance managed by `Turso <https://turso.tech/>`_.
+- Use the `libSQL test server <https://github.com/libsql/hrana-test-server>`_
+  implemented in python
 
 Co-requisites
 -------------
 
-This dialect requires SQLAlchemy and libsql_client. They are specified as requirements so ``pip``
-will install them if they are not already in place. To install, just::
+This dialect requires the python packages `SQLAlchemy
+<https://pypi.org/project/SQLAlchemy/>`__ (version 2.0 or later) and
+`libsql_client <https://pypi.org/project/libsql-client/>`_. They are specified
+as requirements so ``pip`` will install them if they are not already in place.
+To install, just::
 
     pip install sqlalchemy-libsql
 
 Getting Started
 ---------------
 
-Create an URL that points to your libsql database.
-Then, in your Python app, you can connect to the database via::
+You must construct a special URL that SQLAlchemy can use to locate your
+database. This will be different than the usual HTTP or websocket URLs that you
+normally use with the libSQL client SDKs.
+
+If you are running an instance of sqld on your own machine, normally listening
+at 127.0.0.1 port 8080, the SQLAlchemy URL looks like this::
+
+    sqlite+libsql://127.0.0.1:8080
+
+If your sqld instance is configured to use SSL with some hostname, and requires
+authentication with a database token (including Turso databases), you must
+provide two additional configurations in the query string of the URL::
+
+    sqlite+libsql://your-database-hostname/?authToken=your-auth-token&secure=true
+
+``your-database-hostname`` and ``your-auth-token`` above are unique to your
+database. ``secure=true`` specifies the use of SSL.
+
+You can then pass this URL to SQLAlchemy::
 
     from sqlalchemy import create_engine
-    engine = create_engine("sqlite+libsql://your-db.your-server.com?authToken=JWT_HERE&secure=true")
-
-Note that ``secure=true`` query/search parameter will force the usage of
-secure WebSockets (``wss://``) to connect to the remote server.
+    engine = create_engine(url)
 
 Development
 -----------
