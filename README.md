@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> This repo is now archived, and progress continues at [tursodatabase/libsql-sqlalchemy](https://github.com/tursodatabase/libsql-sqlalchemy)
+
 sqlalchemy-libsql
 =================
 
